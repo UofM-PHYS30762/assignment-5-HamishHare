@@ -40,5 +40,10 @@ int main()
   //   std::cout<<*element<<std::endl;
   // }
 
+  //fm6.set_energy(-30120120000000232455.121);
+
+  //FourMomentum fm7{-1.023, 12, 34, 56};
+  
+
   return 0;
 }

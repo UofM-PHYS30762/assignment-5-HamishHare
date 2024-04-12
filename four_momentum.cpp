@@ -18,7 +18,8 @@ void FourMomentum::validate_energy()
 {
   if(energy<0)
   {
-    std::cout<<"Particle energies cannot be negative. You entered "<<energy<<" MeV/c.";
+    std::cout<<"Particle energies cannot be negative. You entered "
+             <<energy<<" MeV/c."<<std::endl;
     throw std::invalid_argument("Invalid particle energy.");
   }
 }
