@@ -117,7 +117,7 @@ void FourMomentum::set_pz(const double& new_pz)
 }
 
 // Print information
-void FourMomentum::print_info()
+void FourMomentum::print_info() const
 {
   std::cout<<std::scientific<<std::setprecision(2)
            <<"Four Momentum: ("<<energy<<", "

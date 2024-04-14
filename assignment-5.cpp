@@ -6,44 +6,48 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Hamish Hare
 
+#include "lepton.h"
 #include "four_momentum.h"
 
 int main()
 {
-  // Testing Four-Momentum
-  FourMomentum fm1;
-  FourMomentum fm2{3.0, 4.0, 5.0, -6.0};
-  //fm1.print_info();
-  //fm2.print_info();
+  Lepton l1;
+  l1.print_info();
+  l1.set_charge(1);
+  l1.set_rest_mass(105.6583755);
+  l1.set_type("muon");
+  // l1.set_energy(12.34); l1.set_px(23.45); l1.set_py(34.56); l1.set_pz(45.67);
+  // l1.print_info();
+  l1.set_four_momentum(123.4, 234.5, 345.6, 456.7);
+  l1.print_info();
 
-  FourMomentum fm3{fm2};
-  fm3.set_energy(4530323.34);
-  fm3.set_px(2.323); fm3.set_py(-124.12); fm3.set_pz(-2.12123);
-  //fm3.print_info();
+  Lepton l2{"electron", 0.511, -1, 23.121, 123.13443, 435345.2, 912.3};
+  l2.print_info();
 
-  FourMomentum fm4;
-  fm4 = fm3;
-  //fm4.print_info();
+  // std::cout<<"type: "<<l2.get_type()<<std::endl;
+  // std::cout<<"rest mass: "<<l2.get_rest_mass()<<std::endl;
+  // std::cout<<"charge: "<<l2.get_charge()<<std::endl;
+  // std::cout<<"four momentum (0): "<<l2.get_four_momentum()[0]<<std::endl;
+  // std::cout<<"energy: "<<l2.get_energy()<<std::endl;
+  // std::cout<<"px: "<<l2.get_px()<<std::endl;
+  // std::cout<<"py: "<<l2.get_py()<<std::endl;
+  // std::cout<<"pz: "<<l2.get_pz()<<std::endl;
 
-  FourMomentum fm5{std::move(fm2)};
-  //fm5.print_info();
-  //fm2.print_info();
+  // Lepton l3{l2};
+  // l3.print_info();
 
-  FourMomentum fm6;
-  fm6 = std::move(fm3);
-  //fm6.print_info();
+  // Lepton l4{std::move(l2)};
+  // l4.print_info();
+  // l2.print_info();
 
-  vector<double> fm6_vec = fm6.get_all();
+  // Lepton l5;
+  // l5 = l2;
+  // l5.print_info();
 
-  // for(auto element{fm6_vec.begin()}; element<fm6_vec.end(); ++element)
-  // {
-  //   std::cout<<*element<<std::endl;
-  // }
-
-  //fm6.set_energy(-30120120000000232455.121);
-
-  //FourMomentum fm7{-1.023, 12, 34, 56};
+  Lepton l6;
+  l6 = std::move(l1);
+  l6.print_info();
+  l1.print_info();
   
-
   return 0;
 }

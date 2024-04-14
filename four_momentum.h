@@ -56,7 +56,7 @@ public:
   void set_pz(const double& new_pz);
 
   // Print out the information
-  void print_info();
+  void print_info() const;
 };
 
 #endif // FOUR_MOMENTUM_H
