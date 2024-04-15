@@ -116,6 +116,36 @@ void FourMomentum::set_pz(const double& new_pz)
   momentum_z = new_pz;
 }
 
+void FourMomentum::set_all(const double& new_energy, const double& new_px,
+                           const double& new_py, const double& new_pz)
+{
+  // Set elements
+  energy = new_energy;
+  momentum_x = new_px;
+  momentum_y = new_py;
+  momentum_z = new_pz;
+  // Validate elements
+  validate_energy();
+}
+
+void FourMomentum::set_all(const vector<double>& new_momentum_vector)
+{
+  // Validate input size
+  if(new_momentum_vector.size() != 4)
+  {
+    std::cout<<"Provided four momentum should have 4 elements. You entered one with"
+             <<new_momentum_vector.size()<<".";
+    throw std::invalid_argument("Invalid particle mass.");
+  }
+  // Set elements
+  energy = new_momentum_vector[0];
+  momentum_x = new_momentum_vector[1];
+  momentum_y = new_momentum_vector[2];
+  momentum_z = new_momentum_vector[3];
+  // Validate elements
+  validate_energy();
+}
+
 // Print information
 void FourMomentum::print_info() const
 {
