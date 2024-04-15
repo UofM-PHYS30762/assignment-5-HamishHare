@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <stdexcept> // for throwing exceptions
 #include "lepton.h"
 
 // Rule of 5
@@ -106,13 +107,14 @@ void Lepton::print_info() const
   // Check if the Lepton has been moved or not before printing
   if (four_momentum)
   {
+    string particle_name = (charge>0) ? "anti" + particle_type : particle_type;
     std::cout<<std::scientific<<std::setprecision(3)
-             <<"--------------------------------"<<std::endl
-             <<"Particle: "<<particle_type<<std::endl
+            //  <<"--------------------------------"<<std::endl
+             <<"Particle: "<<particle_name<<std::endl
              <<"Rest Mass: "<<rest_mass<<" MeV"<<std::endl
              <<"Charge: "<<charge<<" e"<<std::endl;
     four_momentum->print_info();
-    std::cout<<"--------------------------------"<<std::endl;
+    // std::cout<<"--------------------------------"<<std::endl;
     // Undo the output formatting
     std::cout.unsetf(std::ios::scientific);
   }
@@ -121,5 +123,6 @@ void Lepton::print_info() const
     std::cout<<"--------------------------------"<<std::endl
              <<"Lepton unavailable (it has been moved)"<<std::endl
              <<"--------------------------------"<<std::endl;
+    throw std::runtime_error("Error: attempting to access a particle which has been moved.");
   }
 }

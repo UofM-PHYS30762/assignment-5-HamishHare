@@ -21,6 +21,7 @@ protected:
   std::unique_ptr<FourMomentum> four_momentum;
   double rest_mass{0}; // in MeV
   int charge{-1}; // in multiples of e
+  const int speed_of_light{299792458}; // in m/s
 public:
   // Rule of 5
   // .. Default constructor
