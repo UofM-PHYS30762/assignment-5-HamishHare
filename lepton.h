@@ -61,7 +61,7 @@ public:
   void set_pz(const double& new_pz){four_momentum->set_pz(new_pz);}
 
   // Print information
-  virtual void print_info() const;
+  virtual void print_info() const = 0;
 };
 
 #endif // LEPTON_H
