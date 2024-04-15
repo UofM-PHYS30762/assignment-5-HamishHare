@@ -93,10 +93,11 @@ void Lepton::set_charge(const int& new_charge)
 void Lepton::set_four_momentum(const double& new_energy, const double& new_px,
                                const double& new_py, const double& new_pz)
 {
-  four_momentum->set_energy(new_energy);
-  four_momentum->set_px(new_px);
-  four_momentum->set_py(new_py);
-  four_momentum->set_pz(new_pz);
+  four_momentum->set_all(new_energy, new_px, new_py, new_pz);
+}
+void Lepton::set_four_momentum(const vector<double>& new_momentum_vector)
+{
+  four_momentum->set_all(new_momentum_vector);
 }
 
 // Print information

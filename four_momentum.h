@@ -55,8 +55,8 @@ public:
   void set_py(const double& new_py);
   void set_pz(const double& new_pz);
   void set_all(const double& new_energy, const double& new_px,
-               const double& new_py, const double& new_pz);
-  void set_all(const vector<double>& new_momentum_vector);
+               const double& new_py, const double& new_pz); // individual entries
+  void set_all(const vector<double>& new_momentum_vector); // with a vector
 
   // Print out the information
   void print_info() const;

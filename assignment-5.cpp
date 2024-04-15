@@ -11,15 +11,18 @@
 
 int main()
 {
-  // Lepton l1;
-  // l1.print_info();
-  // l1.set_charge(1);
-  // l1.set_rest_mass(105.6583755);
-  // l1.set_type("muon");
-  // // l1.set_energy(12.34); l1.set_px(23.45); l1.set_py(34.56); l1.set_pz(45.67);
-  // // l1.print_info();
-  // l1.set_four_momentum(123.4, 234.5, 345.6, 456.7);
-  // l1.print_info();
+  Lepton l1;
+  l1.print_info();
+  l1.set_charge(1);
+  l1.set_rest_mass(105.6583755);
+  l1.set_type("muon");
+  l1.set_energy(12.34); l1.set_px(23.45); l1.set_py(34.56); l1.set_pz(45.67);
+  l1.print_info();
+  l1.set_four_momentum(123.4, 234.5, 345.6, 456.7);
+  l1.print_info();
+  vector<double> temp{112.34, 123.45, 134.56, 145.67};
+  l1.set_four_momentum(temp);
+  l1.print_info();
 
   // Lepton l2{"electron", 0.511, -1, 23.121, 123.13443, 435345.2, 912.3};
   // l2.print_info();
@@ -49,13 +52,13 @@ int main()
   // l6.print_info();
   // l1.print_info();
 
-  FourMomentum f1{};
-  f1.print_info();
-  f1.set_all(1.234, 2.345, 3.456, 4.567);
-  f1.print_info();
-  vector<double> temp{12.34, 23.45, 34.56, 45.67};
-  f1.set_all(temp);
-  f1.print_info();
+  // FourMomentum f1{};
+  // f1.print_info();
+  // f1.set_all(1.234, 2.345, 3.456, 4.567);
+  // f1.print_info();
+  // vector<double> temp{12.34, 23.45, 34.56, 45.67};
+  // f1.set_all(temp);
+  // f1.print_info();
   
   return 0;
 }

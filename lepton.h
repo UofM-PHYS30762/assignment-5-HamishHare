@@ -53,14 +53,15 @@ public:
   void set_rest_mass(const double& new_rest_mass);
   void set_charge(const int& new_charge);
   void set_four_momentum(const double& new_energy, const double& new_px,
-                         const double& new_py, const double& new_pz);
+                         const double& new_py, const double& new_pz); // individual entries
+  void set_four_momentum(const vector<double>& new_momentum_vector); // with a vector
   void set_energy(const double& new_energy){four_momentum->set_energy(new_energy);}
   void set_px(const double& new_px){four_momentum->set_px(new_px);}
   void set_py(const double& new_py){four_momentum->set_py(new_py);}
   void set_pz(const double& new_pz){four_momentum->set_pz(new_pz);}
 
   // Print information
-  void print_info() const;
+  virtual void print_info() const;
 };
 
 #endif // LEPTON_H
