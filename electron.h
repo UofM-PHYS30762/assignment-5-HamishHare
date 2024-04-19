@@ -29,10 +29,10 @@ public:
            const double& px, const double& py, const double& pz);
   // .. Destructor
   ~Electron(){std::cout<<"Calling Electron destructor"<<std::endl;}
-  // // .. Copy constructor
-  // Electron(const Electron& electron_to_copy);
-  // // .. Move constructor
-  // Electron(Electron&& electron_to_move);
+  // .. Copy constructor
+  Electron(const Electron& electron_to_copy);
+  // .. Move constructor
+  Electron(Electron&& electron_to_move);
   // // .. Copy assignment operator
   // Electron& operator=(const Electron& electron_to_copy);
   // // .. Move assignment operator

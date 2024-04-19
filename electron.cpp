@@ -36,26 +36,20 @@ Electron::Electron(const int& charge_quanta, const double& energy,
   deposited_energies[0] = energy / 2.0;
   deposited_energies[1] = energy / 2.0;
 }
-// // .. Copy constructor
-// Lepton::Lepton(const Lepton& lepton_to_copy)
-// {
-//   std::cout<<"Calling Lepton copy constructor"<<std::endl;
-//   // Copy the data members
-//   particle_type = lepton_to_copy.particle_type;
-//   four_momentum = std::make_unique<FourMomentum>(*lepton_to_copy.four_momentum);;
-//   rest_mass = lepton_to_copy.rest_mass;
-//   charge = lepton_to_copy.charge;
-// }
-// // .. Move constructor
-// Lepton::Lepton(Lepton&& lepton_to_move)
-// {
-//   std::cout<<"Calling Lepton move constructor"<<std::endl;
-//   // Move the data members
-//   particle_type = lepton_to_move.particle_type;
-//   four_momentum = std::move(lepton_to_move.four_momentum);
-//   rest_mass = lepton_to_move.rest_mass;
-//   charge = lepton_to_move.charge;
-// }
+// .. Copy constructor
+Electron::Electron(const Electron& electron_to_copy) : Lepton(electron_to_copy)
+{
+    std::cout << "Calling Electron copy constructor" << std::endl;
+    // Copy the remaining (electron only) data members
+    deposited_energies = electron_to_copy.deposited_energies;
+}
+// .. Move constructor
+Electron::Electron(Electron&& electron_to_move) : Lepton(std::move(electron_to_move))
+{
+  std::cout<<"Calling Electron move constructor"<<std::endl;
+  // Move the remaining (electron only) data members
+  deposited_energies = std::move(electron_to_move.deposited_energies);
+}
 // // .. Copy assignment operator
 // Lepton& Lepton::operator=(const Lepton& lepton_to_copy)
 // {
