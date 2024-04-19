@@ -163,5 +163,7 @@ void Electron::print_info() const
     layer_num++;
   }
   std::cout<<"+-------------------------------------+"<<std::endl;
+  // Undo the output formatting
+  std::cout.unsetf(std::ios::scientific);
   std::cout<<"================================"<<std::endl;
 }
