@@ -7,7 +7,6 @@
 // Hamish Hare
 
 #include <iostream>
-#include <iomanip>
 #include "muon.h"
 
 // Rule of 5

@@ -10,35 +10,41 @@
 #include "four_momentum.h"
 #include "electron.h"
 #include "muon.h"
+#include "neutrino.h"
 
 int main()
 {
-  // Muon m1;
-  // m1.print_info();
+  // Neutrino n1;
+  // n1.print_info();
 
-  Muon m2{+1, 100.1, 200.2, 300.3, 400.4, true};
-  // m2.print_info();
+  Neutrino n2{false, 432.1, 543.2, 654.3, 765.4, true, "mUoN"};
+  n2.print_info();
+  // Neutrino n3{true, 432.1, 543.2, 654.3, 765.4, false, "tAU"};
+  // n3.print_info();
+  // std::cout<<n2.get_has_interacted()<<std::endl;
+  
+  // Neutrino n4{true, 432.1, 543.2, 654.3, 765.4, true, "t\nU"};
+  // n3.print_info();
 
-  // Muon m3{m2};
-  // m3.set_is_isolated(false);
-  // m3.print_info();
-  // m2.print_info();
+  // Neutrino n5{n2};
+  // n5.set_has_interacted(false);
+  // n5.print_info();
+  // n2.print_info();
 
-  // Muon m4{std::move(m2)};
-  // m4.print_info();
-  // m2.print_info(); // to prove m2 moved
+  // Neutrino n6{std::move(n2)};
+  // n6.set_has_interacted(false);
+  // n6.print_info();
+  // n2.print_info(); // to prove moved
 
-  // Muon m5;
-  // m5 = m2;
-  // m5.set_charge(-1);
-  // m5.print_info();
-  // m2.print_info();
+  // Neutrino n7;
+  // n7 = n2;
+  // n7.print_info();
+  // n2.print_info();
 
-  Muon m6;
-  m6 = std::move(m2);
-  m6.set_charge(-1);
-  m6.print_info();
-  m2.print_info(); // to prove m2 moved
+  Neutrino n8;
+  n8 = std::move(n2);
+  n8.print_info();
+  n2.print_info(); // to prove moved
 
   // Electron e1;
   // e1.print_info();

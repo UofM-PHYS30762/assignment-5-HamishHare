@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <stdexcept> // for throwing exceptions
 #include "electron.h"
 
 // Rule of 5
