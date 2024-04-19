@@ -33,10 +33,10 @@ public:
   Electron(const Electron& electron_to_copy);
   // .. Move constructor
   Electron(Electron&& electron_to_move);
-  // // .. Copy assignment operator
-  // Electron& operator=(const Electron& electron_to_copy);
-  // // .. Move assignment operator
-  // Electron& operator=(Electron&& electron_to_move);
+  // .. Copy assignment operator
+  Electron& operator=(const Electron& electron_to_copy);
+  // .. Move assignment operator
+  Electron& operator=(Electron&& electron_to_move);
 
   // Getters
   // Setters

@@ -50,34 +50,34 @@ Electron::Electron(Electron&& electron_to_move) : Lepton(std::move(electron_to_m
   // Move the remaining (electron only) data members
   deposited_energies = std::move(electron_to_move.deposited_energies);
 }
-// // .. Copy assignment operator
-// Lepton& Lepton::operator=(const Lepton& lepton_to_copy)
-// {
-//   std::cout<<"Calling Lepton copy assignment operator"<<std::endl;
-//   if(&lepton_to_copy == this) return *this; // no self-assignment
+// .. Copy assignment operator
+Electron& Electron::operator=(const Electron& electron_to_copy)
+{
+  std::cout<<"Calling Electron copy assignment operator"<<std::endl;
+  if(&electron_to_copy == this) return *this; // no self-assignment
   
-//   // Copy the data members
-//   particle_type = lepton_to_copy.particle_type;
-//   four_momentum = std::make_unique<FourMomentum>(*lepton_to_copy.four_momentum);;
-//   rest_mass = lepton_to_copy.rest_mass;
-//   charge = lepton_to_copy.charge;
+  // Copy the data members
+  // .. of the base class
+  Lepton::operator=(electron_to_copy);
+  // .. of the electron only
+  deposited_energies = electron_to_copy.deposited_energies;
 
-//   return *this;
-// }
-// // .. Move assignment operator
-// Lepton& Lepton::operator=(Lepton&& lepton_to_move)
-// {
-//   std::cout<<"Calling Lepton move assignment operator"<<std::endl;
-//   if(&lepton_to_move == this) return *this; // no self-assignment
+  return *this;
+}
+// .. Move assignment operator
+Electron& Electron::operator=(Electron&& electron_to_move)
+{
+  std::cout<<"Calling Electron move assignment operator"<<std::endl;
+  if(&electron_to_move == this) return *this; // no self-assignment
 
-//   // Move the data members
-//   particle_type = lepton_to_move.particle_type;
-//   four_momentum = std::move(lepton_to_move.four_momentum);
-//   rest_mass = lepton_to_move.rest_mass;
-//   charge = lepton_to_move.charge;
+  // Move the data members
+  // .. of the base class
+  Lepton::operator=(std::move(electron_to_move));
+  // .. of the electron only
+  deposited_energies = std::move(electron_to_move.deposited_energies);
   
-//   return *this;
-// }
+  return *this;
+}
 
 // Print information
 void Electron::print_info() const
