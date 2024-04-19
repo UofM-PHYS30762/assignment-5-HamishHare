@@ -27,16 +27,27 @@ int main()
   // e4.print_info();
   // // e2.print_info(); // Prove e2 has been moved
 
-  Electron e5;
-  e5 = e2;
-  e5.print_info();
-  e2.print_info();
+  // Electron e5;
+  // e5 = e2;
+  // e5.print_info();
+  // e2.print_info();
 
-  Electron e6;
-  e6 = std::move(e2);
-  e6.print_info();
-  e2.print_info();
+  // Electron e6;
+  // e6 = std::move(e2);
+  // e6.print_info();
+  // e2.print_info(); // Prove e2 has been moved
 
+  // std::cout<<e2.get_deposited_energies()[0]<<std::endl
+  //          <<e2.get_deposited_energies()[1]<<std::endl
+  //          <<e2.get_deposited_energies()[2]<<std::endl
+  //          <<e2.get_deposited_energies()[3]<<std::endl;
+
+  vector<double> temp{12.3, 23.4, 34.5, 45.6};
+  //vector<double> temp{12.3, 23.4, 34.5}; // too few elements
+  //vector<double> temp{12.3, 23.4, 34.5, 45.6, 56.7}; // too many elements
+  //vector<double> temp{12.3, 23.4, 34.5, -45.6};  // a negative value
+  e2.set_deposited_energies(temp);
+  e2.print_info();
 
   return 0;
 }

@@ -79,6 +79,69 @@ Electron& Electron::operator=(Electron&& electron_to_move)
   return *this;
 }
 
+// Validation functions for the Setters below
+namespace ElectronFuncs
+{
+  void validate_positive_energy(const double& energy)
+  {
+    if(energy<0)
+    {
+      std::cout<<"Provided energy deposited values cannot be negative."<<std::endl;
+      throw std::invalid_argument("Invalid energy deposited value.");
+    }
+  }
+}
+
+// Setters
+void Electron::set_deposited_energies(const vector<double>& new_deposited_energies)
+{
+  // TODO: Validation and input handling
+  // Validate input size
+  if(new_deposited_energies.size() != 4)
+  {
+    std::cout<<"Provided energy deposited vector should have 4 elements. "
+             <<"You entered one with "
+             <<new_deposited_energies.size()<<"."<<std::endl;
+    throw std::invalid_argument("Invalid energy deposited vector.");
+  }
+  // Validate all given energies are positive and sum them
+  double total_energy{0};
+  for(auto energy{new_deposited_energies.begin()};
+      energy<new_deposited_energies.end(); ++energy)
+  {
+    ElectronFuncs::validate_positive_energy(*energy);
+    total_energy += *energy;
+  }
+  const double small_tolerance{1.0e-12};
+  // Check and handle the energy totals
+  if(abs(total_energy - four_momentum->get_energy()) > small_tolerance)
+  {
+    std::cout<<std::setprecision(13)
+            <<"Total energy of provided energy deposited vector ("<<total_energy
+            <<" MeV/c) does not equal the energy of the electron ("
+            <<four_momentum->get_energy()<<" MeV/c) to within 10^-12 tolerance. "
+            <<"Workaround has been applied to allocate all electron energy to the"
+            <<" EM layers of the calorimeter as best as possible."<<std::endl;
+    // Allocate energies as best as possible
+    double electron_energy{four_momentum->get_energy()};
+    if(new_deposited_energies[0] > electron_energy)
+    {
+      deposited_energies = {electron_energy, 0.0, 0.0, 0.0};
+    }
+    else
+    {
+      deposited_energies = {new_deposited_energies[0],
+                            electron_energy-new_deposited_energies[0],
+                            0.0, 0.0};
+    }
+  }
+  else deposited_energies = new_deposited_energies;
+}
+// void Electron::set_deposited_energy_layer(size_t layer_number, double new_deposited_energy)
+// {
+//   // TODO: Validation and input handling
+// }
+
 // Print information
 void Electron::print_info() const
 {

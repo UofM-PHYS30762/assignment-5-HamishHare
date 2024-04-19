@@ -39,7 +39,10 @@ public:
   Electron& operator=(Electron&& electron_to_move);
 
   // Getters
+  vector<double> get_deposited_energies() const {return deposited_energies;}
   // Setters
+  void set_deposited_energies(const vector<double>& new_deposited_energies);
+  // void set_deposited_energy_layer(size_t layer_number, double new_deposited_energy);
 
   // Print information
   void print_info() const;

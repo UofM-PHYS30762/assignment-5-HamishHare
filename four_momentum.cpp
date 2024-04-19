@@ -131,9 +131,9 @@ void FourMomentum::set_all(const vector<double>& new_momentum_vector) // with a 
   // Validate input size
   if(new_momentum_vector.size() != 4)
   {
-    std::cout<<"Provided four momentum should have 4 elements. You entered one with"
+    std::cout<<"Provided four momentum should have 4 elements. You entered one with "
              <<new_momentum_vector.size()<<"."<<std::endl;
-    throw std::invalid_argument("Invalid particle mass.");
+    throw std::invalid_argument("Invalid four momentum vector.");
   }
   // Set elements
   energy = new_momentum_vector[0];
