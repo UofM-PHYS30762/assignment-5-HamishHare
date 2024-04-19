@@ -14,11 +14,14 @@
 // .. Default constructor
 Electron::Electron() : deposited_energies{0.0, 0.0, 0.0, 0.0}
 {
+  std::cout<<"Calling default Electron constructor"<<std::endl;
   particle_type = "electron";
   rest_mass = electron_rest_mass;
   charge = -1;
   four_momentum->set_all(electron_rest_mass/speed_of_light, 0.0, 0.0, 0.0);
-  std::cout<<"Calling default Electron constructor"<<std::endl;
+  // Assume all energy is deposited equally in first two (EM) layers
+  deposited_energies[0] = (electron_rest_mass/speed_of_light) / 2.0;
+  deposited_energies[1] = (electron_rest_mass/speed_of_light) / 2.0;
 }
 // .. Parameterised constructor
 Electron::Electron(const int& charge_quanta, const double& energy,
@@ -29,6 +32,9 @@ Electron::Electron(const int& charge_quanta, const double& energy,
   std::cout<<"Calling parameterised Electron constructor"<<std::endl;
   // TODO: Validation
   rest_mass = electron_rest_mass;
+  // Assume all energy is deposited equally in first two (EM) layers
+  deposited_energies[0] = energy / 2.0;
+  deposited_energies[1] = energy / 2.0;
 }
 // // .. Copy constructor
 // Lepton::Lepton(const Lepton& lepton_to_copy)
@@ -86,18 +92,19 @@ void Electron::print_info() const
   // Call the Lepton print function first
   Lepton::print_info();
   // Print out the energy lost by the electron
-  size_t layer_num{1};
+  size_t layer_num{0};
   std::cout<<std::scientific<<std::setprecision(3)
-           <<"+---------------------------------------+"<<std::endl
-           <<"|           CALORIMETER INFO:           |"<<std::endl
-           <<"+---------------------------------------+"<<std::endl;
+           <<"+-------------------------------------+"<<std::endl
+           <<"|          CALORIMETER INFO:          |"<<std::endl
+           <<"+-------------------------------------+"<<std::endl;
   for(auto energy_loss{deposited_energies.begin()};
       energy_loss<deposited_energies.end(); ++energy_loss)
   {
-    std::cout<<"| Energy lost in layer "<<layer_num<<": "
-             <<*energy_loss<<" MeV |"<<std::endl;
+    string buffer = (layer_names[layer_num].length()==5) ? "" : " ";
+    std::cout<<"| Energy lost in "<<layer_names[layer_num]<<buffer<<": "
+             <<*energy_loss<<" MeV"<<" |"<<std::endl;
     layer_num++;
   }
-  std::cout<<"+---------------------------------------+"<<std::endl;
+  std::cout<<"+-------------------------------------+"<<std::endl;
   std::cout<<"================================"<<std::endl;
 }
