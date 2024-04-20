@@ -16,7 +16,7 @@ class Muon : public Lepton
 {
 private:
   bool is_isolated;
-  const double muon_rest_mass{105.6583755}; // MeV
+  const double muon_rest_mass{105.6583755}; // MeV/c^2
 public:
   // Rule of 5
   // .. Default constructor

@@ -26,7 +26,7 @@ Muon::Muon(const int& charge_quanta, const double& energy,
            is_isolated{isolated_flag},
            Lepton("muon", 0.0, charge_quanta, energy, px, py, pz)
 {
-  std::cout<<"Calling parameterised Electron constructor"<<std::endl;
+  std::cout<<"Calling parameterised Muon constructor"<<std::endl;
   // TODO: Validation
   rest_mass = muon_rest_mass;
 }

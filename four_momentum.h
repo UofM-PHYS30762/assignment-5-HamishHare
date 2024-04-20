@@ -26,7 +26,6 @@ private:
 
 public:
   // Rule of 5
-  // TODO: FINISH THESE
   // .. Default constructor
   FourMomentum(){std::cout<<"Calling default FourMomentum constructor"<<std::endl;}
   // .. Parameterised constructor

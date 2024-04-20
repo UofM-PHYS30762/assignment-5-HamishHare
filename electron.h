@@ -19,7 +19,7 @@ class Electron : public Lepton
 private:
   vector<double> deposited_energies;
   const vector<string> layer_names{"EM_1", "EM_2", "HAD_1", "HAD_2"};
-  const double electron_rest_mass{0.51099895}; // MeV
+  const double electron_rest_mass{0.51099895}; // MeV/c^2
 public:
   // Rule of 5
   // .. Default constructor

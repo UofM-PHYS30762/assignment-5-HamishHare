@@ -1,1 +1,1 @@
-g++ -std=c++17 -g .\assignment-5.cpp .\lepton.cpp .\four_momentum.cpp .\electron.cpp .\muon.cpp .\neutrino.cpp -o .\assignment-5
+g++ -std=c++17 -g .\assignment-5.cpp .\lepton.cpp .\four_momentum.cpp .\electron.cpp .\muon.cpp .\neutrino.cpp .\tau.cpp -o .\assignment-5

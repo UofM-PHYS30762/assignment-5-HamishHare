@@ -19,7 +19,7 @@ class Lepton
 protected:
   string particle_type{"WARNING!! base lepton"};
   std::unique_ptr<FourMomentum> four_momentum;
-  double rest_mass{0}; // in MeV
+  double rest_mass{0}; // in MeV/c^2
   int charge{-1}; // in multiples of e
   const int speed_of_light{299792458}; // in m/s
 public:

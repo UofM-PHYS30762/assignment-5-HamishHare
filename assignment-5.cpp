@@ -11,40 +11,37 @@
 #include "electron.h"
 #include "muon.h"
 #include "neutrino.h"
+#include "tau.h"
 
 int main()
 {
-  // Neutrino n1;
-  // n1.print_info();
+  // Tau t1;
+  // t1.print_info();
 
-  Neutrino n2{false, 432.1, 543.2, 654.3, 765.4, true, "mUoN"};
-  n2.print_info();
-  // Neutrino n3{true, 432.1, 543.2, 654.3, 765.4, false, "tAU"};
-  // n3.print_info();
-  // std::cout<<n2.get_has_interacted()<<std::endl;
-  
-  // Neutrino n4{true, 432.1, 543.2, 654.3, 765.4, true, "t\nU"};
-  // n3.print_info();
+  Tau t2{1, 34.2, 56.2, 24.45, 912.3};
+  t2.print_info();
 
-  // Neutrino n5{n2};
-  // n5.set_has_interacted(false);
-  // n5.print_info();
-  // n2.print_info();
+  // Tau t3{t2};
+  // t3.print_info();
+  // std::cout<<t3.get_decay_type()<<std::endl;
+  // t2.print_info();
 
-  // Neutrino n6{std::move(n2)};
-  // n6.set_has_interacted(false);
-  // n6.print_info();
-  // n2.print_info(); // to prove moved
+  // Tau t4{std::move(t2)};
+  // t4.print_info();
+  // t2.print_info(); // prove moved
 
-  // Neutrino n7;
-  // n7 = n2;
-  // n7.print_info();
-  // n2.print_info();
+  Tau t5;
+  t5 = t2;
+  t5.print_info();
+  t2.print_info();
 
-  Neutrino n8;
-  n8 = std::move(n2);
-  n8.print_info();
-  n2.print_info(); // to prove moved
+  // Tau t6;
+  // t6 = std::move(t2);
+  // t6.print_info();
+  // t2.print_info(); // prove moved
+
+  // Neutrino nT{true, 111.11, 222.22, 333.33, 444.44, false, "TaU"};
+  // nT.print_info();
 
   // Electron e1;
   // e1.print_info();

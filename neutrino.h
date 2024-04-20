@@ -17,7 +17,7 @@ class Neutrino : public Lepton
 {
 private:
   bool has_interacted;
-  const double neutrino_rest_mass{0.0}; // MeV
+  const double neutrino_rest_mass{0.0}; // MeV/c^2
 public:
   // Rule of 5
   // .. Default constructor
