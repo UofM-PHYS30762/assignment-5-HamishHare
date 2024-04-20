@@ -84,6 +84,15 @@ int main()
   new_e.print_info();
 
   // .. shared ptr for tau
+  std::cout<<"Shared tau:"<<std::endl;
+  std::shared_ptr<Tau> sharedTau = std::make_shared<Tau>(-1, 3.2, 5.2, 2.45, 9.3);
+  std::shared_ptr<Tau> tau1 = sharedTau;
+  std::shared_ptr<Tau> tau2 = sharedTau;
+  // .. printing information from either variable will give the same result
+  std::cout<<"tau1:"<<std::endl;
+  tau1->print_info();
+  std::cout<<"tau2 (same info):"<<std::endl;
+  tau2->print_info();
 
   return 0;
 }
