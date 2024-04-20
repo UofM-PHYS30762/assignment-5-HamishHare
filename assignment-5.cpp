@@ -23,6 +23,14 @@ int main()
 
   Tau t2{1, 34.2, 56.2, 24.45, 912.3};
   t2.print_info();
+  vector<std::shared_ptr<Lepton>> products{t2.get_decay_products()};
+  for(auto particle{products.begin()};
+      particle<products.end(); ++particle)
+  {
+    std::cout<<" - "<<(*particle)->get_type()<<std::endl;
+    // Note: get_type() would not properly handle anti-particles for
+    //       electrons and muons if they could be created.
+  }
 
   // Tau t3{t2};
   // t3.print_info();

@@ -21,7 +21,7 @@ private:
   string decay_type;
   const double tau_rest_mass{1776.86}; // MeV/c^2
   vector<std::shared_ptr<Lepton>> decay_products;
-  
+
 public:
   // Rule of 5
   // .. Default constructor
@@ -42,6 +42,8 @@ public:
 
   // Getters
   string get_decay_type() const {return decay_type;}
+  vector<std::shared_ptr<Lepton>> get_decay_products() const {return decay_products;}
+
   // Setters
   // TODO: decay setting
 
