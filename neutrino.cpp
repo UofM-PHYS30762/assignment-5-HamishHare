@@ -60,9 +60,9 @@ Neutrino::Neutrino(const bool& is_antiparticle, const double& energy,
 // .. Copy constructor
 Neutrino::Neutrino(const Neutrino& neutrino_to_copy) : Lepton(neutrino_to_copy)
 {
-    std::cout << "Calling Neutrino copy constructor" << std::endl;
-    // Copy the remaining (neutrino only) data members
-    has_interacted = neutrino_to_copy.has_interacted;
+  std::cout << "Calling Neutrino copy constructor" << std::endl;
+  // Copy the remaining (neutrino only) data members
+  has_interacted = neutrino_to_copy.has_interacted;
 }
 // .. Move constructor
 Neutrino::Neutrino(Neutrino&& neutrino_to_move) : Lepton(std::move(neutrino_to_move))

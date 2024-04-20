@@ -15,18 +15,18 @@
 
 int main()
 {
-  Tau t1;
+  // Tau t1;
   // t1.print_info();
   // t1.decay_hadronically();
   // t1.decay_leptonically();
-  t1.decay();
+  // t1.decay();
 
-  // Tau t2{1, 34.2, 56.2, 24.45, 912.3};
-  // t2.print_info();
+  Tau t2{1, 34.2, 56.2, 24.45, 912.3};
+  t2.print_info();
 
   // Tau t3{t2};
   // t3.print_info();
-  // std::cout<<t3.get_decay_type()<<std::endl;
+  // // std::cout<<t3.get_decay_type()<<std::endl;
   // t2.print_info();
 
   // Tau t4{std::move(t2)};

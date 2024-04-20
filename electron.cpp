@@ -40,9 +40,9 @@ Electron::Electron(const int& charge_quanta, const double& energy,
 // .. Copy constructor
 Electron::Electron(const Electron& electron_to_copy) : Lepton(electron_to_copy)
 {
-    std::cout << "Calling Electron copy constructor" << std::endl;
-    // Copy the remaining (electron only) data members
-    deposited_energies = electron_to_copy.deposited_energies;
+  std::cout << "Calling Electron copy constructor" << std::endl;
+  // Copy the remaining (electron only) data members
+  deposited_energies = electron_to_copy.deposited_energies;
 }
 // .. Move constructor
 Electron::Electron(Electron&& electron_to_move) : Lepton(std::move(electron_to_move))

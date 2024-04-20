@@ -22,8 +22,10 @@ Tau::Tau()
   rest_mass = tau_rest_mass;
   charge = -1;
   four_momentum->set_all(tau_rest_mass/speed_of_light, 0.0, 0.0, 0.0);
-  // TODO: DECAY!!!!
-  decay_type = "leptonic";
+  decay();
+  // NOTE: May be better to define the decay results of a default
+  //       constructed Tau, to prevent uneccesary particles being
+  //       created (including further Tau decay chains).
 }
 // .. Parameterised constructor
 Tau::Tau(const int& charge_quanta, const double& energy,
@@ -33,16 +35,17 @@ Tau::Tau(const int& charge_quanta, const double& energy,
   std::cout<<"Calling parameterised Tau constructor"<<std::endl;
   // TODO: Validation
   rest_mass = tau_rest_mass;
-  // TODO:: DECAY!!!!
-  decay_type = "leptonic";
+  decay();
 }
 // .. Copy constructor
 Tau::Tau(const Tau& tau_to_copy) : Lepton(tau_to_copy)
 {
-    std::cout << "Calling Tau copy constructor" << std::endl;
-    // Copy the remaining (tau only) data members
-    decay_type = tau_to_copy.decay_type;
-    // TODO: DECAY!!!!
+  std::cout << "Calling Tau copy constructor" << std::endl;
+  // Copy the remaining (tau only) data members
+  decay_type = tau_to_copy.decay_type;
+  decay_products = tau_to_copy.decay_products;
+  // NOTE: Should this create new decay products identical to the first instead
+  //       of just sharing the pointers?
 }
 // .. Move constructor
 Tau::Tau(Tau&& tau_to_move) : Lepton(std::move(tau_to_move))
@@ -50,7 +53,10 @@ Tau::Tau(Tau&& tau_to_move) : Lepton(std::move(tau_to_move))
   std::cout<<"Calling Tau move constructor"<<std::endl;
   // Move the remaining (tau only) data members
   decay_type = std::move(tau_to_move.decay_type);
-  // TODO: DECAY!!!!
+  decay_products = std::move(tau_to_move.decay_products);
+  // Clean up the other data
+  tau_to_move.decay_type = "";
+  tau_to_move.decay_products.clear();
 }
 // .. Copy assignment operator
 Tau& Tau::operator=(const Tau& tau_to_copy)
@@ -63,7 +69,9 @@ Tau& Tau::operator=(const Tau& tau_to_copy)
   Lepton::operator=(tau_to_copy);
   // .. of the tau only
   decay_type = tau_to_copy.decay_type;
-  // TODO: DECAY!!!!
+  decay_products = tau_to_copy.decay_products;
+  // NOTE: Should this create new decay products identical to the first instead
+  //       of just sharing the pointers?
 
   return *this;
 }
@@ -78,7 +86,10 @@ Tau& Tau::operator=(Tau&& tau_to_move)
   Lepton::operator=(std::move(tau_to_move));
   // .. of the tau only
   decay_type = std::move(tau_to_move.decay_type);
-  // TODO: DECAY!!!!
+  decay_products = std::move(tau_to_move.decay_products);
+  // Clean up the other data
+  tau_to_move.decay_type = "";
+  tau_to_move.decay_products.clear();
   
   return *this;
 }
@@ -113,7 +124,7 @@ void Tau::decay_leptonically()
 {
   // NOTE: There are no physical values used here. I am using
   //       the following relationships:
-  //       Lepton chance: 1/3 Electon, 1/3 Muon, 1/3 Tau
+  //       Lepton chance: 45% Electon, 45% Muon, 10% Tau
   //       Energy (out of original): 5% tau neutrino, 90% lepton, 5% lepton neutrino
   //       Momenta (out of original): 5% to tau neutrino, 90% lepton, 5% lepton neutrino
   double energy = four_momentum->get_energy();
@@ -140,15 +151,15 @@ void Tau::decay_leptonically()
   std::cout<<"DEBUG: rng = "<<random_number<<std::endl;
 
   // Assign the random number to a decay chain
-  if(random_number<0.333333)
+  if(random_number<0.1)
   {
-    // Electron decay
-    std::cout<<"DEBUG: electron decay"<<std::endl;
-    lepton_ptr = std::make_shared<Electron>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz);
+    // Tau decay
+    std::cout<<"DEBUG: tau decay"<<std::endl;
+    lepton_ptr = std::make_shared<Tau>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz);
     lepton_neutrino_ptr = std::make_shared<Neutrino>(true, 0.05*energy,0.05*px,
-                                                     0.05*py, 0.05*pz, false, "electron");
+                                                     0.05*py, 0.05*pz, false, "tau");
   }
-  else if(random_number>0.666666)
+  else if(random_number>0.55)
   {
     // Muon decay
     std::cout<<"DEBUG: muon decay"<<std::endl;
@@ -158,16 +169,16 @@ void Tau::decay_leptonically()
   }
   else
   {
-    // Tau decay
-    std::cout<<"DEBUG: tau decay"<<std::endl;
-    lepton_ptr = std::make_shared<Tau>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz);
+    // Electron decay
+    std::cout<<"DEBUG: electron decay"<<std::endl;
+    lepton_ptr = std::make_shared<Electron>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz);
     lepton_neutrino_ptr = std::make_shared<Neutrino>(true, 0.05*energy,0.05*px,
-                                                     0.05*py, 0.05*pz, false, "tau");
+                                                     0.05*py, 0.05*pz, false, "electron");
   }
 
   // Add the decay products to the decay_products vector
-  decay_products.push_back(lepton_ptr);
   decay_products.push_back(tau_neutrino_ptr);
+  decay_products.push_back(lepton_ptr);
   decay_products.push_back(lepton_neutrino_ptr);
 }
 
@@ -179,5 +190,17 @@ void Tau::print_info() const
   Lepton::print_info();
   // Print out the Tau info
   std::cout<<"Decay Type: "<<decay_type<<std::endl;
+  // Print any leptonic decay products
+  if(decay_type=="leptonic")
+  {
+    std::cout<<"Decay Products:"<<std::endl;
+    for(auto particle{decay_products.begin()};
+        particle<decay_products.end(); ++particle)
+    {
+      std::cout<<" - "<<(*particle)->get_type()<<std::endl;
+      // Note: get_type() would not properly handle anti-particles for
+      //       electrons and muons if they could be created.
+    }
+  }
   std::cout<<"================================"<<std::endl;
 }

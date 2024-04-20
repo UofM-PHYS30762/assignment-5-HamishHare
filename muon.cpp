@@ -33,9 +33,9 @@ Muon::Muon(const int& charge_quanta, const double& energy,
 // .. Copy constructor
 Muon::Muon(const Muon& muon_to_copy) : Lepton(muon_to_copy)
 {
-    std::cout << "Calling Muon copy constructor" << std::endl;
-    // Copy the remaining (muon only) data members
-    is_isolated = muon_to_copy.is_isolated;
+  std::cout << "Calling Muon copy constructor" << std::endl;
+  // Copy the remaining (muon only) data members
+  is_isolated = muon_to_copy.is_isolated;
 }
 // .. Move constructor
 Muon::Muon(Muon&& muon_to_move) : Lepton(std::move(muon_to_move))
