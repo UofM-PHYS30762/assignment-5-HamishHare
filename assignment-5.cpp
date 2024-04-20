@@ -15,11 +15,14 @@
 
 int main()
 {
-  // Tau t1;
+  Tau t1;
   // t1.print_info();
+  // t1.decay_hadronically();
+  // t1.decay_leptonically();
+  t1.decay();
 
-  Tau t2{1, 34.2, 56.2, 24.45, 912.3};
-  t2.print_info();
+  // Tau t2{1, 34.2, 56.2, 24.45, 912.3};
+  // t2.print_info();
 
   // Tau t3{t2};
   // t3.print_info();
@@ -30,10 +33,10 @@ int main()
   // t4.print_info();
   // t2.print_info(); // prove moved
 
-  Tau t5;
-  t5 = t2;
-  t5.print_info();
-  t2.print_info();
+  // Tau t5;
+  // t5 = t2;
+  // t5.print_info();
+  // t2.print_info();
 
   // Tau t6;
   // t6 = std::move(t2);

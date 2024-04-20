@@ -10,13 +10,18 @@
 #define TAU_H
 
 #include <string>
+#include <vector>
+#include <memory> // smart pointers
 #include "lepton.h"
+using std::vector;
 
 class Tau : public Lepton
 {
 private:
   string decay_type;
   const double tau_rest_mass{1776.86}; // MeV/c^2
+  vector<std::shared_ptr<Lepton>> decay_products;
+  
 public:
   // Rule of 5
   // .. Default constructor
@@ -39,6 +44,11 @@ public:
   string get_decay_type() const {return decay_type;}
   // Setters
   // TODO: decay setting
+
+  // Decay functions
+  void decay();
+  void decay_hadronically();
+  void decay_leptonically();
 
   // Print information
   void print_info() const;
