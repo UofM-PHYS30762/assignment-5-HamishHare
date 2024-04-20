@@ -126,3 +126,20 @@ void Lepton::print_info() const
     throw std::runtime_error("Error: attempting to access a particle which has been moved.");
   }
 }
+
+// Friend functions
+// Addition operator overload
+// .. returns a new particle with the summed four momenta of this
+// .. particle with that of a given other particle
+FourMomentum operator+(const Lepton &lepton1, const Lepton &lepton2)
+{
+  FourMomentum summed_momentum{lepton1.four_momentum->get_energy()+
+                               lepton2.four_momentum->get_energy(),
+                               lepton1.four_momentum->get_px()+
+                               lepton2.four_momentum->get_px(),
+                               lepton1.four_momentum->get_py()+
+                               lepton2.four_momentum->get_py(),
+                               lepton1.four_momentum->get_pz()+
+                               lepton2.four_momentum->get_pz()};
+  return summed_momentum;
+}

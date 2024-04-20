@@ -15,22 +15,27 @@
 
 int main()
 {
+  Electron e{1, 1.0, 2.0, 3.0, 4.0};
+  Muon m{1, 10.0, 20.0, 30.0, 40.0, false};
+  Neutrino nt{true, 100.0, 200.0, 300.0, 400.0, false, "TaU"};
+  // e.print_info();
+  // m.print_info();
+  // nT.print_info();
+  FourMomentum fm1{e+m};
+  FourMomentum fm2{m+nt};
+  FourMomentum fm3{nt+e};
+  fm1.print_info();
+  fm2.print_info();
+  fm3.print_info();
+  
   // Tau t1;
   // t1.print_info();
   // t1.decay_hadronically();
   // t1.decay_leptonically();
   // t1.decay();
 
-  Tau t2{1, 34.2, 56.2, 24.45, 912.3};
-  t2.print_info();
-  vector<std::shared_ptr<Lepton>> products{t2.get_decay_products()};
-  for(auto particle{products.begin()};
-      particle<products.end(); ++particle)
-  {
-    std::cout<<" - "<<(*particle)->get_type()<<std::endl;
-    // Note: get_type() would not properly handle anti-particles for
-    //       electrons and muons if they could be created.
-  }
+  // Tau t2{1, 34.2, 56.2, 24.45, 912.3};
+  // t2.print_info();
 
   // Tau t3{t2};
   // t3.print_info();

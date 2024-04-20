@@ -61,6 +61,9 @@ public:
   void set_py(const double& new_py){four_momentum->set_py(new_py);}
   void set_pz(const double& new_pz){four_momentum->set_pz(new_pz);}
 
+  // Friend functions
+  friend FourMomentum operator+(const Lepton &lepton1, const Lepton &lepton2);
+
   // Print information
   virtual void print_info() const = 0;
 };
