@@ -11,6 +11,7 @@
 
 #include <string>
 #include "lepton.h"
+#include "assignment5_consts.cpp"
 
 class Muon : public Lepton
 {
@@ -26,7 +27,7 @@ public:
        const double& px, const double& py, const double& pz,
        const bool& isolated_flag);
   // .. Destructor
-  ~Muon(){std::cout<<"Calling Muon destructor"<<std::endl;}
+  ~Muon(){if(assignment5_consts::show_messages) std::cout<<"Calling Muon destructor"<<std::endl;}
   // .. Copy constructor
   Muon(const Muon& muon_to_copy);
   // .. Move constructor

@@ -12,6 +12,7 @@
 #include <string>
 #include <memory> // smart pointers
 #include "four_momentum.h"
+#include "assignment5_consts.cpp"
 using std::string;
 
 class Lepton
@@ -30,7 +31,7 @@ public:
   Lepton(const string& type, const double& mass, const int& charge_quanta,
          const double& energy, const double& px, const double& py, const double& pz);
   // .. Destructor
-  ~Lepton(){std::cout<<"Calling Lepton destructor"<<std::endl;}
+  ~Lepton(){if(assignment5_consts::show_messages) std::cout<<"Calling Lepton destructor"<<std::endl;}
   // .. Copy constructor
   Lepton(const Lepton& lepton_to_copy);
   // .. Move constructor

@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include "assignment5_consts.cpp"
 using std::vector;
 
 class FourMomentum
@@ -27,12 +28,12 @@ private:
 public:
   // Rule of 5
   // .. Default constructor
-  FourMomentum(){std::cout<<"Calling default FourMomentum constructor"<<std::endl;}
+  FourMomentum(){if(assignment5_consts::show_messages) std::cout<<"Calling default FourMomentum constructor"<<std::endl;}
   // .. Parameterised constructor
   FourMomentum(const double& initial_energy, const double& initial_px,
                const double& initial_py, const double& initial_pz);
   // .. Destructor
-  ~FourMomentum(){std::cout<<"Calling FourMomentum destructor"<<std::endl;}
+  ~FourMomentum(){if(assignment5_consts::show_messages) std::cout<<"Calling FourMomentum destructor"<<std::endl;}
   // .. Copy constructor
   FourMomentum(const FourMomentum& momenta_to_copy);
   // .. Move constructor

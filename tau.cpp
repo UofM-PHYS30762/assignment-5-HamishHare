@@ -12,12 +12,13 @@
 #include "neutrino.h" // used in decay products
 #include "electron.h" // used in decay products
 #include "muon.h" // used in decay products
+#include "assignment5_consts.cpp"
 
 // Rule of 5
 // .. Default constructor
 Tau::Tau()
 {
-  std::cout<<"Calling default Tau constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling default Tau constructor"<<std::endl;
   particle_type = "tau";
   rest_mass = tau_rest_mass;
   charge = -1;
@@ -32,7 +33,7 @@ Tau::Tau(const int& charge_quanta, const double& energy,
          const double& px, const double& py, const double& pz) :
          Lepton("tau", 0.0, charge_quanta, energy, px, py, pz)
 {
-  std::cout<<"Calling parameterised Tau constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling parameterised Tau constructor"<<std::endl;
   // TODO: Validation
   rest_mass = tau_rest_mass;
   decay();
@@ -40,7 +41,7 @@ Tau::Tau(const int& charge_quanta, const double& energy,
 // .. Copy constructor
 Tau::Tau(const Tau& tau_to_copy) : Lepton(tau_to_copy)
 {
-  std::cout << "Calling Tau copy constructor" << std::endl;
+  if(assignment5_consts::show_messages) std::cout << "Calling Tau copy constructor" << std::endl;
   // Copy the remaining (tau only) data members
   decay_type = tau_to_copy.decay_type;
   decay_products = tau_to_copy.decay_products;
@@ -50,7 +51,7 @@ Tau::Tau(const Tau& tau_to_copy) : Lepton(tau_to_copy)
 // .. Move constructor
 Tau::Tau(Tau&& tau_to_move) : Lepton(std::move(tau_to_move))
 {
-  std::cout<<"Calling Tau move constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Tau move constructor"<<std::endl;
   // Move the remaining (tau only) data members
   decay_type = std::move(tau_to_move.decay_type);
   decay_products = std::move(tau_to_move.decay_products);
@@ -61,7 +62,7 @@ Tau::Tau(Tau&& tau_to_move) : Lepton(std::move(tau_to_move))
 // .. Copy assignment operator
 Tau& Tau::operator=(const Tau& tau_to_copy)
 {
-  std::cout<<"Calling Tau copy assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Tau copy assignment operator"<<std::endl;
   if(&tau_to_copy == this) return *this; // no self-assignment
   
   // Copy the data members
@@ -78,7 +79,7 @@ Tau& Tau::operator=(const Tau& tau_to_copy)
 // .. Move assignment operator
 Tau& Tau::operator=(Tau&& tau_to_move)
 {
-  std::cout<<"Calling Tau move assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Tau move assignment operator"<<std::endl;
   if(&tau_to_move == this) return *this; // no self-assignment
 
   // Move the data members
@@ -108,7 +109,7 @@ void Tau::decay()
   std::mt19937 generator(rng()); // seed the mt19937 generator with the system rng device
   std::uniform_real_distribution<double> distribution(0.0, 1.0); // define a uniform dist.
   double random_number = distribution(generator); // generate the random number
-  std::cout<<"DEBUG: rng = "<<random_number<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"DEBUG: rng = "<<random_number<<std::endl;
   // Perform decay
   if(random_number<0.65) decay_hadronically();
   else decay_leptonically();
@@ -117,7 +118,7 @@ void Tau::decay()
 void Tau::decay_hadronically()
 {
   // TODO: Validate hasn't already decayed
-  std::cout<<"Tau has decayed hadronically"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Tau has decayed hadronically"<<std::endl;
   decay_type = "hadronic";
 }
 void Tau::decay_leptonically()
@@ -134,7 +135,7 @@ void Tau::decay_leptonically()
   // TODO: Validate hasn't already decayed
 
   // Start decay process
-  std::cout<<"Tau has decayed leptonically"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Tau has decayed leptonically"<<std::endl;
   decay_type = "leptonic";
   bool is_anti = (charge>0) ? true : false;
   std::shared_ptr<Neutrino> tau_neutrino_ptr{
@@ -148,13 +149,13 @@ void Tau::decay_leptonically()
   std::mt19937 generator(rng()); // seed the mt19937 generator with the system rng device
   std::uniform_real_distribution<double> distribution(0.0, 1.0); // define a uniform dist.
   double random_number = distribution(generator); // generate the random number
-  std::cout<<"DEBUG: rng = "<<random_number<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"DEBUG: rng = "<<random_number<<std::endl;
 
   // Assign the random number to a decay chain
   if(random_number<0.1)
   {
     // Tau decay
-    std::cout<<"DEBUG: tau decay"<<std::endl;
+    if(assignment5_consts::show_messages) std::cout<<"DEBUG: tau decay"<<std::endl;
     lepton_ptr = std::make_shared<Tau>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz);
     lepton_neutrino_ptr = std::make_shared<Neutrino>(true, 0.05*energy,0.05*px,
                                                      0.05*py, 0.05*pz, false, "tau");
@@ -162,7 +163,7 @@ void Tau::decay_leptonically()
   else if(random_number>0.55)
   {
     // Muon decay
-    std::cout<<"DEBUG: muon decay"<<std::endl;
+    if(assignment5_consts::show_messages) std::cout<<"DEBUG: muon decay"<<std::endl;
     lepton_ptr = std::make_shared<Muon>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz, false);
     lepton_neutrino_ptr = std::make_shared<Neutrino>(true, 0.05*energy,0.05*px,
                                                      0.05*py, 0.05*pz, false, "muon");
@@ -170,7 +171,7 @@ void Tau::decay_leptonically()
   else
   {
     // Electron decay
-    std::cout<<"DEBUG: electron decay"<<std::endl;
+    if(assignment5_consts::show_messages) std::cout<<"DEBUG: electron decay"<<std::endl;
     lepton_ptr = std::make_shared<Electron>(-1, 0.9*energy, 0.9*px, 0.9*py, 0.9*pz);
     lepton_neutrino_ptr = std::make_shared<Neutrino>(true, 0.05*energy,0.05*px,
                                                      0.05*py, 0.05*pz, false, "electron");

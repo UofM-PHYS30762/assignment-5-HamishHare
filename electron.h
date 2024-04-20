@@ -11,6 +11,7 @@
 
 #include <string>
 #include "lepton.h"
+#include "assignment5_consts.cpp"
 using std::string;
 using std::vector;
 
@@ -28,7 +29,7 @@ public:
   Electron(const int& charge_quanta, const double& energy,
            const double& px, const double& py, const double& pz);
   // .. Destructor
-  ~Electron(){std::cout<<"Calling Electron destructor"<<std::endl;}
+  ~Electron(){if(assignment5_consts::show_messages) std::cout<<"Calling Electron destructor"<<std::endl;}
   // .. Copy constructor
   Electron(const Electron& electron_to_copy);
   // .. Move constructor

@@ -10,6 +10,7 @@
 #include <algorithm> // for transform
 #include <stdexcept> // for throwing exceptions
 #include "neutrino.h"
+#include "assignment5_consts.cpp"
 
 namespace NeutrinoFuncs
 {
@@ -37,7 +38,7 @@ namespace NeutrinoFuncs
 // .. Default constructor
 Neutrino::Neutrino() : has_interacted{false}
 {
-  std::cout<<"Calling default Neutrino constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling default Neutrino constructor"<<std::endl;
   particle_type = "electron neutrino";
   rest_mass = neutrino_rest_mass;
   charge = -1;
@@ -50,7 +51,7 @@ Neutrino::Neutrino(const bool& is_antiparticle, const double& energy,
                    has_interacted{interacted_flag},
                    Lepton("temporary neutrino type", 0.0, 0, energy, px, py, pz)
 {
-  std::cout<<"Calling parameterised Neutrino constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling parameterised Neutrino constructor"<<std::endl;
   // TODO: Full Validation
   NeutrinoFuncs::to_lowercase(flavour);
   NeutrinoFuncs::validate_flavour(flavour);
@@ -60,21 +61,21 @@ Neutrino::Neutrino(const bool& is_antiparticle, const double& energy,
 // .. Copy constructor
 Neutrino::Neutrino(const Neutrino& neutrino_to_copy) : Lepton(neutrino_to_copy)
 {
-  std::cout << "Calling Neutrino copy constructor" << std::endl;
+  if(assignment5_consts::show_messages) std::cout << "Calling Neutrino copy constructor" << std::endl;
   // Copy the remaining (neutrino only) data members
   has_interacted = neutrino_to_copy.has_interacted;
 }
 // .. Move constructor
 Neutrino::Neutrino(Neutrino&& neutrino_to_move) : Lepton(std::move(neutrino_to_move))
 {
-  std::cout<<"Calling Neutrino move constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Neutrino move constructor"<<std::endl;
   // Move the remaining (neutrino only) data members
   has_interacted = std::move(neutrino_to_move.has_interacted);
 }
 // .. Copy assignment operator
 Neutrino& Neutrino::operator=(const Neutrino& neutrino_to_copy)
 {
-  std::cout<<"Calling Neutrino copy assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Neutrino copy assignment operator"<<std::endl;
   if(&neutrino_to_copy == this) return *this; // no self-assignment
   
   // Copy the data members
@@ -88,7 +89,7 @@ Neutrino& Neutrino::operator=(const Neutrino& neutrino_to_copy)
 // .. Move assignment operator
 Neutrino& Neutrino::operator=(Neutrino&& neutrino_to_move)
 {
-  std::cout<<"Calling Neutrino move assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Neutrino move assignment operator"<<std::endl;
   if(&neutrino_to_move == this) return *this; // no self-assignment
 
   // Move the data members

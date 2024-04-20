@@ -10,12 +10,13 @@
 #include <iomanip>
 #include <stdexcept> // for throwing exceptions
 #include "electron.h"
+#include "assignment5_consts.cpp"
 
 // Rule of 5
 // .. Default constructor
 Electron::Electron() : deposited_energies{0.0, 0.0, 0.0, 0.0}
 {
-  std::cout<<"Calling default Electron constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling default Electron constructor"<<std::endl;
   particle_type = "electron";
   rest_mass = electron_rest_mass;
   charge = -1;
@@ -30,7 +31,7 @@ Electron::Electron(const int& charge_quanta, const double& energy,
                    deposited_energies{0.0, 0.0, 0.0, 0.0},
                    Lepton("electron", 0.0, charge_quanta, energy, px, py, pz)
 {
-  std::cout<<"Calling parameterised Electron constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling parameterised Electron constructor"<<std::endl;
   // TODO: Validation
   rest_mass = electron_rest_mass;
   // Assume all energy is deposited equally in first two (EM) layers
@@ -40,21 +41,21 @@ Electron::Electron(const int& charge_quanta, const double& energy,
 // .. Copy constructor
 Electron::Electron(const Electron& electron_to_copy) : Lepton(electron_to_copy)
 {
-  std::cout << "Calling Electron copy constructor" << std::endl;
+  if(assignment5_consts::show_messages) std::cout << "Calling Electron copy constructor" << std::endl;
   // Copy the remaining (electron only) data members
   deposited_energies = electron_to_copy.deposited_energies;
 }
 // .. Move constructor
 Electron::Electron(Electron&& electron_to_move) : Lepton(std::move(electron_to_move))
 {
-  std::cout<<"Calling Electron move constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Electron move constructor"<<std::endl;
   // Move the remaining (electron only) data members
   deposited_energies = std::move(electron_to_move.deposited_energies);
 }
 // .. Copy assignment operator
 Electron& Electron::operator=(const Electron& electron_to_copy)
 {
-  std::cout<<"Calling Electron copy assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Electron copy assignment operator"<<std::endl;
   if(&electron_to_copy == this) return *this; // no self-assignment
   
   // Copy the data members
@@ -68,7 +69,7 @@ Electron& Electron::operator=(const Electron& electron_to_copy)
 // .. Move assignment operator
 Electron& Electron::operator=(Electron&& electron_to_move)
 {
-  std::cout<<"Calling Electron move assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Electron move assignment operator"<<std::endl;
   if(&electron_to_move == this) return *this; // no self-assignment
 
   // Move the data members

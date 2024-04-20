@@ -13,6 +13,7 @@
 #include <vector>
 #include <memory> // smart pointers
 #include "lepton.h"
+#include "assignment5_consts.cpp"
 using std::vector;
 
 class Tau : public Lepton
@@ -30,7 +31,7 @@ public:
   Tau(const int& charge_quanta, const double& energy,
        const double& px, const double& py, const double& pz);
   // .. Destructor
-  ~Tau(){std::cout<<"Calling Tau destructor"<<std::endl;}
+  ~Tau(){if(assignment5_consts::show_messages) std::cout<<"Calling Tau destructor"<<std::endl;}
   // .. Copy constructor
   Tau(const Tau& tau_to_copy);
   // .. Move constructor

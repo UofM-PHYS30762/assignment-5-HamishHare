@@ -11,6 +11,7 @@
 
 #include <string>
 #include "lepton.h"
+#include "assignment5_consts.cpp"
 using std::string;
 
 class Neutrino : public Lepton
@@ -27,7 +28,7 @@ public:
            const double& px, const double& py, const double& pz,
            const bool& interacted_flag, string flavour);
   // .. Destructor
-  ~Neutrino(){std::cout<<"Calling Neutrino destructor"<<std::endl;}
+  ~Neutrino(){if(assignment5_consts::show_messages) std::cout<<"Calling Neutrino destructor"<<std::endl;}
   // .. Copy constructor
   Neutrino(const Neutrino& neutrino_to_copy);
   // .. Move constructor

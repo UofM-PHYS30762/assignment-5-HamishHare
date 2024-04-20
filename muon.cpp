@@ -8,12 +8,13 @@
 
 #include <iostream>
 #include "muon.h"
+#include "assignment5_consts.cpp"
 
 // Rule of 5
 // .. Default constructor
 Muon::Muon() : is_isolated{false}
 {
-  std::cout<<"Calling default Muon constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling default Muon constructor"<<std::endl;
   particle_type = "muon";
   rest_mass = muon_rest_mass;
   charge = -1;
@@ -26,28 +27,28 @@ Muon::Muon(const int& charge_quanta, const double& energy,
            is_isolated{isolated_flag},
            Lepton("muon", 0.0, charge_quanta, energy, px, py, pz)
 {
-  std::cout<<"Calling parameterised Muon constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling parameterised Muon constructor"<<std::endl;
   // TODO: Validation
   rest_mass = muon_rest_mass;
 }
 // .. Copy constructor
 Muon::Muon(const Muon& muon_to_copy) : Lepton(muon_to_copy)
 {
-  std::cout << "Calling Muon copy constructor" << std::endl;
+  if(assignment5_consts::show_messages) std::cout << "Calling Muon copy constructor" << std::endl;
   // Copy the remaining (muon only) data members
   is_isolated = muon_to_copy.is_isolated;
 }
 // .. Move constructor
 Muon::Muon(Muon&& muon_to_move) : Lepton(std::move(muon_to_move))
 {
-  std::cout<<"Calling Muon move constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Muon move constructor"<<std::endl;
   // Move the remaining (muon only) data members
   is_isolated = std::move(muon_to_move.is_isolated);
 }
 // .. Copy assignment operator
 Muon& Muon::operator=(const Muon& muon_to_copy)
 {
-  std::cout<<"Calling Muon copy assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Muon copy assignment operator"<<std::endl;
   if(&muon_to_copy == this) return *this; // no self-assignment
   
   // Copy the data members
@@ -61,7 +62,7 @@ Muon& Muon::operator=(const Muon& muon_to_copy)
 // .. Move assignment operator
 Muon& Muon::operator=(Muon&& muon_to_move)
 {
-  std::cout<<"Calling Muon move assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Muon move assignment operator"<<std::endl;
   if(&muon_to_move == this) return *this; // no self-assignment
 
   // Move the data members

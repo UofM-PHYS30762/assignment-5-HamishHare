@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <vector>
 #include "four_momentum.h"
+#include "assignment5_consts.cpp"
 using std::vector;
 
 // Validation
@@ -31,14 +32,14 @@ FourMomentum::FourMomentum(const double& initial_energy, const double& initial_p
                            energy{initial_energy}, momentum_x{initial_px},
                            momentum_y{initial_py}, momentum_z{initial_pz}
 {
-  std::cout<<"Calling parameterised FourMomentum constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling parameterised FourMomentum constructor"<<std::endl;
   // Validation
   validate_energy();
 }
 // .. Copy constructor
 FourMomentum::FourMomentum(const FourMomentum& momenta_to_copy)
 {
-  std::cout<<"Calling FourMomentum copy constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling FourMomentum copy constructor"<<std::endl;
   // Copy the data members
   energy = momenta_to_copy.energy;
   momentum_x = momenta_to_copy.momentum_x;
@@ -50,7 +51,7 @@ FourMomentum::FourMomentum(const FourMomentum& momenta_to_copy)
 //  same functionality as the copy constructor.)
 FourMomentum::FourMomentum(FourMomentum&& momenta_to_move)
 {
-  std::cout<<"Calling FourMomentum move constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling FourMomentum move constructor"<<std::endl;
   // Move the data members over
   energy = std::move(momenta_to_move.energy);
   momentum_x = std::move(momenta_to_move.momentum_x);
@@ -60,7 +61,7 @@ FourMomentum::FourMomentum(FourMomentum&& momenta_to_move)
 // .. Copy assignment operator
 FourMomentum& FourMomentum::operator=(const FourMomentum& momenta_to_copy)
 {
-  std::cout<<"Calling FourMomentum copy assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling FourMomentum copy assignment operator"<<std::endl;
   if(&momenta_to_copy == this) return *this; // no self-assignment
   
   // Copy the data members
@@ -74,7 +75,7 @@ FourMomentum& FourMomentum::operator=(const FourMomentum& momenta_to_copy)
 // .. Move assignment operator
 FourMomentum& FourMomentum::operator=(FourMomentum&& momenta_to_move)
 {
-  std::cout<<"Calling FourMomentum move assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling FourMomentum move assignment operator"<<std::endl;
   if(&momenta_to_move == this) return *this; // no self-assignment
 
   // Move the data members over

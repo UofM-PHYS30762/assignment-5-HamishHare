@@ -10,26 +10,27 @@
 #include <iomanip>
 #include <stdexcept> // for throwing exceptions
 #include "lepton.h"
+#include "assignment5_consts.cpp"
 
 // Rule of 5
 // .. Default constructor
 Lepton::Lepton() : four_momentum(std::make_unique<FourMomentum>())
 {
-  std::cout<<"Calling default Lepton constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling default Lepton constructor"<<std::endl;
 }
 // .. Parameterised constructor
 Lepton::Lepton(const string& type, const double& mass, const int& charge_quanta,
                const double& energy, const double& px, const double& py, const double& pz) :
                particle_type{type}, rest_mass{mass}, charge{charge_quanta}
 {
-  std::cout<<"Calling parameterised Lepton constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling parameterised Lepton constructor"<<std::endl;
   // TODO: Validation
   four_momentum = std::make_unique<FourMomentum>(energy, px, py, pz);
 }
 // .. Copy constructor
 Lepton::Lepton(const Lepton& lepton_to_copy)
 {
-  std::cout<<"Calling Lepton copy constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Lepton copy constructor"<<std::endl;
   // Copy the data members
   particle_type = lepton_to_copy.particle_type;
   four_momentum = std::make_unique<FourMomentum>(*lepton_to_copy.four_momentum);;
@@ -39,7 +40,7 @@ Lepton::Lepton(const Lepton& lepton_to_copy)
 // .. Move constructor
 Lepton::Lepton(Lepton&& lepton_to_move)
 {
-  std::cout<<"Calling Lepton move constructor"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Lepton move constructor"<<std::endl;
   // Move the data members
   particle_type = lepton_to_move.particle_type;
   four_momentum = std::move(lepton_to_move.four_momentum);
@@ -49,7 +50,7 @@ Lepton::Lepton(Lepton&& lepton_to_move)
 // .. Copy assignment operator
 Lepton& Lepton::operator=(const Lepton& lepton_to_copy)
 {
-  std::cout<<"Calling Lepton copy assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Lepton copy assignment operator"<<std::endl;
   if(&lepton_to_copy == this) return *this; // no self-assignment
   
   // Copy the data members
@@ -63,7 +64,7 @@ Lepton& Lepton::operator=(const Lepton& lepton_to_copy)
 // .. Move assignment operator
 Lepton& Lepton::operator=(Lepton&& lepton_to_move)
 {
-  std::cout<<"Calling Lepton move assignment operator"<<std::endl;
+  if(assignment5_consts::show_messages) std::cout<<"Calling Lepton move assignment operator"<<std::endl;
   if(&lepton_to_move == this) return *this; // no self-assignment
 
   // Move the data members
@@ -140,7 +141,7 @@ FourMomentum operator+(const Lepton &lepton1, const Lepton &lepton2)
   };
   return summed_momentum;
 }
-// .. Given two Leptons, return the dot product of their four momenta
+// .. Given two Leptons, return the (naive vector) dot product of their four momenta
 double dot_product(const Lepton &lepton1, const Lepton &lepton2)
 {
   double product
