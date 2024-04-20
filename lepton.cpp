@@ -128,18 +128,27 @@ void Lepton::print_info() const
 }
 
 // Friend functions
-// Addition operator overload
-// .. returns a new particle with the summed four momenta of this
-// .. particle with that of a given other particle
+// .. Given two Leptons, return the sum of their four momenta
 FourMomentum operator+(const Lepton &lepton1, const Lepton &lepton2)
 {
-  FourMomentum summed_momentum{lepton1.four_momentum->get_energy()+
-                               lepton2.four_momentum->get_energy(),
-                               lepton1.four_momentum->get_px()+
-                               lepton2.four_momentum->get_px(),
-                               lepton1.four_momentum->get_py()+
-                               lepton2.four_momentum->get_py(),
-                               lepton1.four_momentum->get_pz()+
-                               lepton2.four_momentum->get_pz()};
+  FourMomentum summed_momentum
+  {
+    lepton1.four_momentum->get_energy()+lepton2.four_momentum->get_energy(),
+    lepton1.four_momentum->get_px()+lepton2.four_momentum->get_px(),
+    lepton1.four_momentum->get_py()+lepton2.four_momentum->get_py(),
+    lepton1.four_momentum->get_pz()+lepton2.four_momentum->get_pz()
+  };
   return summed_momentum;
+}
+// .. Given two Leptons, return the dot product of their four momenta
+double dot_product(const Lepton &lepton1, const Lepton &lepton2)
+{
+  double product
+  {
+    lepton1.four_momentum->get_energy()*lepton2.four_momentum->get_energy()+
+    lepton1.four_momentum->get_px()*lepton2.four_momentum->get_px()+
+    lepton1.four_momentum->get_py()*lepton2.four_momentum->get_py()+
+    lepton1.four_momentum->get_pz()*lepton2.four_momentum->get_pz()
+  };
+  return product;
 }

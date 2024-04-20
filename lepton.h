@@ -63,6 +63,7 @@ public:
 
   // Friend functions
   friend FourMomentum operator+(const Lepton &lepton1, const Lepton &lepton2);
+  friend double dot_product(const Lepton &lepton1, const Lepton &lepton2);
 
   // Print information
   virtual void print_info() const = 0;

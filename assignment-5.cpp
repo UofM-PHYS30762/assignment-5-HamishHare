@@ -21,12 +21,18 @@ int main()
   // e.print_info();
   // m.print_info();
   // nT.print_info();
-  FourMomentum fm1{e+m};
-  FourMomentum fm2{m+nt};
-  FourMomentum fm3{nt+e};
-  fm1.print_info();
-  fm2.print_info();
-  fm3.print_info();
+  // FourMomentum fm1{e+m};
+  // FourMomentum fm2{m+nt};
+  // FourMomentum fm3{nt+e};
+  // fm1.print_info();
+  // fm2.print_info();
+  // fm3.print_info();
+  double p1{dot_product(e, m)};
+  std::cout<<p1<<std::endl;
+  double p2{dot_product(m, nt)};
+  std::cout<<p2<<std::endl;
+  double p3{dot_product(nt, e)};
+  std::cout<<p3<<std::endl;
   
   // Tau t1;
   // t1.print_info();
